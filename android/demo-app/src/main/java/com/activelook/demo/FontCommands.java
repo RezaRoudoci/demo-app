@@ -5,14 +5,15 @@ import android.graphics.Point;
 import androidx.core.util.Consumer;
 
 import com.activelook.activelooksdk.Glasses;
-import com.activelook.activelooksdk.types.Configuration;
 import com.activelook.activelooksdk.types.FontData;
 import com.activelook.activelooksdk.types.Rotation;
 
 import java.util.Arrays;
 import java.util.Map;
 
-public class FontCommands extends MainActivity2 {
+public class FontCommands extends CommandsBase {
+
+    private final byte ALL = (byte)0xFF;
 
     @Override
     protected String getCommandGroup() {
@@ -111,7 +112,7 @@ public class FontCommands extends MainActivity2 {
                 }),
                 item("fontDeleteAll", glasses -> {
                     glasses.cfgSet("DemoApp");
-                    glasses.fontDelete((byte) 0xFF);
+                    glasses.fontDelete((byte) ALL);
                 }),
         };
     }

@@ -2,6 +2,7 @@ package com.activelook.demo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,10 +25,11 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.AbstractMap;
 import java.util.Map;
 
-public class MainActivity2 extends AppCompatActivity {
+public class CommandsBase extends AppCompatActivity {
 
     private ArrayAdapter<Map.Entry<String, Consumer<Glasses>>> items;
     public Glasses connectedGlasses;
+    protected byte lastColor = (byte) 0x08;
 
     protected static final Map.Entry<String, Consumer<Glasses>> item(String name, Consumer<Glasses> callback) {
         return new AbstractMap.SimpleImmutableEntry<>(name, callback);
@@ -43,13 +45,13 @@ public class MainActivity2 extends AppCompatActivity {
             this.connectedGlasses = intent.getExtras().getParcelable("connectedGlasses");
             this.connectedGlasses.setOnDisconnected(glasses -> {
                 glasses.disconnect();
-                MainActivity2.this.disconnect();
+                CommandsBase.this.disconnect();
             });
             this.connectedGlasses.subscribeToFlowControlNotifications(status ->
-                    MainActivity2.this.snack(String.format("Flow control: %s", status.name()))
+                    CommandsBase.this.snack(String.format("Flow control: %s", status.name()))
             );
             this.connectedGlasses.subscribeToSensorInterfaceNotifications(() ->
-                    MainActivity2.this.snack("SensorInterface")
+                    CommandsBase.this.snack("SensorInterface")
             );
             this.toast(String.format("Connected to %s", this.connectedGlasses.getName()));
         }
@@ -65,7 +67,7 @@ public class MainActivity2 extends AppCompatActivity {
                 Button button = convertView.findViewById(R.id.command_button);
                 button.setText(cmd.getKey());
                 button.setOnClickListener(view -> {
-                    cmd.getValue().accept(MainActivity2.this.connectedGlasses);
+                    cmd.getValue().accept(CommandsBase.this.connectedGlasses);
                     result.setText("Sent");
                 });
                 return convertView;
@@ -86,7 +88,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     private void bindActions() {
         this.findViewById(R.id.button_back).setOnClickListener(view -> {
-            MainActivity2.this.finish();
+            CommandsBase.this.finish();
         });
         this.items.addAll(this.getCommands());
     }
@@ -94,8 +96,8 @@ public class MainActivity2 extends AppCompatActivity {
     private void disconnect() {
         runOnUiThread(() -> {
             ((DemoApp) this.getApplication()).onDisconnected();
-            MainActivity2.this.connectedGlasses = null;
-            MainActivity2.this.finish();
+            CommandsBase.this.connectedGlasses = null;
+            CommandsBase.this.finish();
         });
     }
 
@@ -128,5 +130,12 @@ public class MainActivity2 extends AppCompatActivity {
         }
         return snack;
     }
+
+    protected void setColor(Glasses glasses,byte color ){
+        glasses.color(color);
+        lastColor = color;
+        glasses.rectf(new Point(0, 0), new Point(304, 256)); // fill screen
+    }
+
 
 }

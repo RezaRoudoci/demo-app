@@ -1,5 +1,7 @@
 package com.activelook.demo;
 
+import android.graphics.Point;
+
 import androidx.core.util.Consumer;
 
 import com.activelook.activelooksdk.Glasses;
@@ -8,7 +10,7 @@ import com.activelook.activelooksdk.types.LedState;
 
 import java.util.Map;
 
-public class GeneralCommands extends MainActivity2 {
+public class GeneralCommands extends CommandsBase {
 
     @Override
     protected String getCommandGroup() {
@@ -26,7 +28,7 @@ public class GeneralCommands extends MainActivity2 {
                 item("grey(b0x0B)", glasses -> glasses.grey((byte) 0x0B)),
                 item("grey(b0x0F)", glasses -> glasses.grey((byte) 0x0F)),
                 item("test(CROSS)", glasses -> glasses.demo(DemoPattern.CROSS)),
-                item("test(FILL)", glasses -> glasses.demo(DemoPattern.FILL)),
+                item("test(FILL)", glasses -> glasses.rectf(new Point(0, 0), new Point(304, 256))),
                 item("test(IMAGE)", glasses -> glasses.demo(DemoPattern.IMAGE)),
                 item("battery()", glasses -> glasses.battery(r -> {
                     GeneralCommands.this.snack(String.format("Battery level: %d", r));

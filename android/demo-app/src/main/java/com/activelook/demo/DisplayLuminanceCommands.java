@@ -6,7 +6,7 @@ import com.activelook.activelooksdk.Glasses;
 
 import java.util.Map;
 
-public class DisplayLuminanceCommands extends MainActivity2 {
+public class DisplayLuminanceCommands extends CommandsBase {
 
     @Override
     protected String getCommandGroup() {

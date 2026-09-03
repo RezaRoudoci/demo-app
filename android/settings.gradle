@@ -1,2 +1,4 @@
 include ':demo-app'
 rootProject.name = "Active Look Demo Applications"
+include ':ActiveLookSDK'
+project(':ActiveLookSDK').projectDir = new File(settingsDir, '../../android-sdk/ActiveLookSDK')

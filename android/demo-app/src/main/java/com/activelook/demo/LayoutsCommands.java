@@ -9,7 +9,7 @@ import com.activelook.activelooksdk.types.Rotation;
 import java.util.Arrays;
 import java.util.Map;
 
-public class LayoutsCommands extends MainActivity2 {
+public class LayoutsCommands extends CommandsBase {
 
     @Override
     protected String getCommandGroup() {

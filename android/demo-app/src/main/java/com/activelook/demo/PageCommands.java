@@ -8,7 +8,7 @@ import com.activelook.activelooksdk.types.PageInfo;
 import java.util.Arrays;
 import java.util.Map;
 
-public class PageCommands extends MainActivity2 {
+public class PageCommands extends CommandsBase {
 
     @Override
     protected String getCommandGroup() {

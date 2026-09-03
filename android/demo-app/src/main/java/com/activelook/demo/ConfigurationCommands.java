@@ -3,12 +3,11 @@ package com.activelook.demo;
 import androidx.core.util.Consumer;
 
 import com.activelook.activelooksdk.Glasses;
-import com.activelook.activelooksdk.types.Configuration;
 
 import java.util.Arrays;
 import java.util.Map;
 
-public class ConfigurationCommands extends MainActivity2 {
+public class ConfigurationCommands extends CommandsBase {
 
     @Override
     protected String getCommandGroup() {

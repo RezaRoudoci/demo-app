@@ -3,12 +3,11 @@ package com.activelook.demo;
 import androidx.core.util.Consumer;
 
 import com.activelook.activelooksdk.Glasses;
-import com.activelook.activelooksdk.types.GaugeInfo;
 
 import java.util.Arrays;
 import java.util.Map;
 
-public class GaugeCommands extends MainActivity2 {
+public class GaugeCommands extends CommandsBase {
 
     @Override
     protected String getCommandGroup() {
